@@ -7,7 +7,7 @@
 <div class='container' *ngIf="(getData()!= null); else elseblock">
   <div class="row">
     <div class="col-xs-8">
-      <app-item-detail [video]="data[0]"></app-item-detail>
+      <app-item-detail [video]="data[currentVideo]"></app-item-detail>
     </div>
     <div class="col-xs-4">
       <app-itemlist [videos]="data"></app-itemlist>

@@ -1,5 +1,8 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit, Input ,ChangeDetectorRef } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AppComponent } from '../app.component';
+import { MyserviceService } from './../myservice.service';
+
 
 @Component({
   selector: 'app-item-detail',
@@ -8,30 +11,43 @@ import { AppComponent } from '../app.component';
 })
 export class ItemDetailComponent implements OnInit {
 
-  title = "kitty";
-  detail = "video just for test";
-  @Input('video') video;
-
-  constructor() { 
-    console.log(this.video);
-  }
-  getVideoTitle(){
-    if(typeof this.video === 'undefined'){
+  @Input() video;
+  // @Input('selected') selected;
+  // constructor() { 
+  //   console.log(this.video);
+  //   // if(this.selected !== 'undefined'){
+  //   //   this.video= this.selected;
+  //   // }
+  // }
+  getVideoTitle() {
+    if (typeof this.video === 'undefined') {
       return "Loading";
     }
     return this.video.snippet.title;
   }
-  getThumbnail(){
-    if(typeof this.video === 'undefined'){
+  getThumbnail() {
+    if (typeof this.video === 'undefined') {
       return "Loading";
     }
-    return this.video.snippet.thumbnails.high.url
+    return this.video.snippet.thumbnails.high.url;
   }
-  getVideoURL(){
-    return `https://www.youtube.com/embed/${this.video.id.videoId}`;
+  getVideoURL() {
+    return this.sanitizer.bypassSecurityTrustUrl("https://www.youtube.com/embed/"+this.video.id.videoId);
   }
-  ngOnInit() {
+  // ngOnInit() {
+  // }
+  constructor(
+    private _sharedService: MyserviceService,private sanitizer:DomSanitizer ) {
+     
+     }
+  ngOnInit(): any {
+    // this._sharedService.videosource$.subscribe(d => { 
+    //   this.video = d;
+    //   console.log('afa');
+    //   console.log(d);
+    //   this.cd.detectChanges();
+    // });
   }
+  
 
 }
- 
