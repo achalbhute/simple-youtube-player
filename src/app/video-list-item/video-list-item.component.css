@@ -1,3 +1,9 @@
 .thumbnail-images{
     padding: 20px;
 }
+.video-list-item{
+    cursor: pointer;
+}
+.video-list-item:hover{
+    background: #F1EDED;
+}

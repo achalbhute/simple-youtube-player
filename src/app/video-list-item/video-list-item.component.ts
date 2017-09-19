@@ -15,14 +15,12 @@ export class VideoListItemComponent implements OnInit {
   //   this.selected.emit(this.video);
     
   // }
-  constructor(
-    private _myserviceService: MyserviceService) { }
+  constructor(private _myserviceService: MyserviceService) { }
     jumpService(){
       console.log('jumpservice')
       this._myserviceService.jumpService(this.index);
     }
   ngOnInit():any {
-    ;
 }
 
 }

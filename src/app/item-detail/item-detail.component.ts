@@ -19,6 +19,9 @@ export class ItemDetailComponent implements OnInit {
   //   //   this.video= this.selected;
   //   // }
   // }
+  constructor(
+    private _sharedService: MyserviceService,private sanitizer:DomSanitizer ) {
+     }
   getVideoTitle() {
     if (typeof this.video === 'undefined') {
       return "Loading";
@@ -32,14 +35,13 @@ export class ItemDetailComponent implements OnInit {
     return this.video.snippet.thumbnails.high.url;
   }
   getVideoURL() {
-    return this.sanitizer.bypassSecurityTrustUrl("https://www.youtube.com/embed/"+this.video.id.videoId);
+    //return "https://www.youtube.com/embed/"+this.video.id.videoId;
+    console.log("https://www.youtube.com/embed/"+this.video.id.videoId);
+    return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/"+this.video.id.videoId);
   }
   // ngOnInit() {
   // }
-  constructor(
-    private _sharedService: MyserviceService,private sanitizer:DomSanitizer ) {
-     
-     }
+  
   ngOnInit(): any {
     // this._sharedService.videosource$.subscribe(d => { 
     //   this.video = d;
